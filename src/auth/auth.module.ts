@@ -10,14 +10,7 @@ import { UserPreferences } from 'src/userprefs/userprefs.entity';
 
 @Module({
     imports: [TypeOrmModule.forFeature([User, UserPreferences]),
-    JwtModule.registerAsync({
-      imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
-        secret: configService.get<string>('JWT_SECRET_KEY'),
-        signOptions: { expiresIn: '1h' },
-      }),
-      inject: [ConfigService],
-    }),
+    JwtModule,
     UserModule,
   ],
   controllers: [AuthController],
